@@ -1,0 +1,13 @@
+version: '3.4'
+
+services:
+  meli-bff:
+    build:
+      context: .
+      target: development
+    volumes:
+      - ./src:/meli-bff/src/
+    ports:
+      - 5000:5000
+    env_file:
+      - .env
