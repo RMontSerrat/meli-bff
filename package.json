@@ -1,0 +1,36 @@
+{
+  "name": "express-rest-es2017-boilerplate",
+  "version": "1.2.2",
+  "description": "Express boilerplate for building RESTful APIs",
+  "author": "Romulo Mont Serrat <sousa.dfs@gmail.com>",
+  "main": "src/app.js",
+  "private": false,
+  "license": "MIT",
+  "engines": {
+    "node": ">=8",
+    "yarn": "*"
+  },
+  "scripts": {
+    "start": "cross-env NODE_ENV=production node ./src/app.js",
+    "dev": "nodemon ./src/app.js",
+    "docker": "docker-compose up",
+    "lint": "eslint ./src/ --ignore-path .gitignore",
+    "lint:fix": "yarn lint --fix",
+    "lint:watch": "yarn lint --watch"
+  },
+  "dependencies": {
+    "axios": "^0.21.0",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "cross-env": "^7.0.2",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-validation": "^3.0.6",
+    "nodemon": "^2.0.6"
+  },
+  "devDependencies": {
+    "eslint": "^7.12.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-plugin-import": "^2.22.1"
+  }
+}
