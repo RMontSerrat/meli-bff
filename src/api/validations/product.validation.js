@@ -12,7 +12,7 @@ const commonItem = {
   picture: Joi.string().required(),
   condition: Joi.string().required(),
   free_shipping: Joi.boolean(),
-}
+};
 const searchValidation = Joi.object({
   items: Joi.array().items(Joi.object({
     ...commonItem,
@@ -30,10 +30,10 @@ const itemValidation = Joi.object({
   item: Joi.object({
     ...commonItem,
     sold_quantity: Joi.number(),
-  })
+  }),
 });
 
 module.exports = {
   searchValidation,
   itemValidation,
-}
+};

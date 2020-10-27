@@ -1,3 +1,5 @@
+/* eslint-disable max-classes-per-file */
+
 class ExtendableError extends Error {
   constructor({
     message, errors, status, stack,
