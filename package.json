@@ -17,7 +17,10 @@
     "lint": "eslint ./src/ --ignore-path .gitignore",
     "lint:fix": "yarn lint --fix",
     "lint:watch": "yarn lint --watch",
-    "test:unit": "mocha ./src/test/unit/**/*.js --colors --exit"
+    "test": "nyc --reporter=html --reporter=text mocha --timeout 20000 --exit --recursive src/test",
+    "test:unit": "mocha ./src/test/unit/**/*.js --colors --exit",
+    "coverage": "nyc report --reporter=text-lcov",
+    "validate": "yarn lint && yarn test"
   },
   "lint-staged": {
     "*.js": [
@@ -34,6 +37,7 @@
     "axios": "^0.21.0",
     "body-parser": "^1.19.0",
     "chai": "^4.2.0",
+    "compression": "^1.7.4",
     "cors": "^2.8.5",
     "cross-env": "^7.0.2",
     "dotenv": "^8.2.0",
@@ -50,6 +54,7 @@
   "devDependencies": {
     "eslint": "^7.12.0",
     "eslint-config-airbnb-base": "^14.2.0",
-    "eslint-plugin-import": "^2.22.1"
+    "eslint-plugin-import": "^2.22.1",
+    "nyc": "^15.1.0"
   }
 }

@@ -10,7 +10,7 @@
  - Gzip compression with [compression](https://github.com/expressjs/compression)
  - Linting with [eslint](http://eslint.org)
  - Tests with [mocha](https://mochajs.org), [chai](http://chaijs.com) and [sinon](http://sinonjs.org)
- - Code coverage with [istanbul](https://istanbul.js.org) and [coveralls](https://coveralls.io)
+ - Code coverage with [istanbul](https://istanbul.js.org)
  - Git hooks with [husky](https://github.com/typicode/husky) 
  - Logging with [morgan](https://github.com/expressjs/morgan)
 
