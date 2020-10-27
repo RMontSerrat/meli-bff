@@ -8,7 +8,7 @@ const {
   itemValidation,
 } = require('../../api/validations/product.validation');
 
-describe('Users API', async () => {
+describe('Items API', async () => {
   it('GET /api/items', () => request(app)
     .get('/api/items')
     .query({ q: 'tenis' })
@@ -17,9 +17,11 @@ describe('Users API', async () => {
       const { error } = searchValidation.validate(JSON.parse(res.text));
       expect(error).to.be.undefined;
     }));
+
   it('GET /api/items without q', () => request(app)
     .get('/api/items')
     .expect(422));
+
   it('GET /api/items/id', () => {
     const id = 'MLA837664226';
     return request(app)
