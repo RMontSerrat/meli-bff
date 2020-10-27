@@ -1,42 +1,47 @@
 const axios = require('axios');
+const APIError = require('../middlewares/apiError');
+const logger = require('../../config/logger');
 
-const headers = {
-  'Content-Type': 'application/json',
-  'Accept': 'application/json',
-};
+const instance = axios.create({
+  header: {
+    'Content-Type': 'application/json',
+    'Accept': 'application/json',
+  }
+});
 
-exports.getItems = async (q) => {
+const getItems = async (q) => {
   try {
-    const url = `${process.env.MELI_API_SEARCH_URL}?q=${q}&limit=10`;
-
-    const result = await axios({
-      method: 'get',
-      url,
-      headers,
-    });
+    const url = `${process.env.MELI_API_SEARCH_URL}?q=${q}&limit=4`;
+    const result = await axios.get(url);
     return result.data;
-  } catch(e) {
-    throw new Error(e);
+  } catch(error) {
+    logger.error(`getItems error: ${error}`);
+    throw new APIError({
+      message: error && error.response ? error.response.data.message : 'getItems error',
+      status: error && error.response ? error.response.data.status : null,
+    });
   }
 }
 
-exports.getItem = async (id) => {
+const getItem = async (id) => {
   try {
-    const getItem =  axios({
-      method: 'get',
-      url: `${process.env.MELI_API_ITEMS_URL}/${id}`,
-      headers,
-    });
-    const getDescription =  axios({
-      method: 'get',
-      url: `${process.env.MELI_API_ITEMS_URL}/${id}/description`,
-      headers,
-    });
+    const url = `${process.env.MELI_API_ITEMS_URL}/${id}`;
+    const getItem =  instance.get(url);
+    const getDescription =  axios.get(`${url}/description`);
 
     const [item, itemDescription] = await Promise.all([getItem, getDescription]);
 
     return { ...item.data, ...itemDescription.data };
-  } catch(e) {
-    throw new Error(e);
+  } catch(error) {
+    logger.error(`getItem error: ${err}`);
+    throw new APIError({
+      message: error && error.response ? error.response.data.message : 'getItem error',
+      status: error && error.response ? error.response.data.status : null,
+    });
   }
 };
+
+module.exports = {
+  getItems,
+  getItem,
+}
