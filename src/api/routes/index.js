@@ -4,7 +4,7 @@ const router = express.Router();
 
 const controllers = require('../controllers/product.controller');
 
-router.get('/healthcheck', (req, res) => {
+router.get('/api/healthcheck', (req, res) => {
   res.json({
     ok: true,
   });

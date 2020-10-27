@@ -33,7 +33,7 @@ const getItem = async (id) => {
 
     return { ...item.data, ...itemDescription.data };
   } catch(error) {
-    logger.error(`getItem error: ${err}`);
+    logger.error(`getItem error: ${error}`);
     throw new APIError({
       message: error && error.response ? error.response.data.message : 'getItem error',
       status: error && error.response ? error.response.data.status : null,

@@ -11,12 +11,13 @@
     "yarn": "*"
   },
   "scripts": {
-    "start": "cross-env NODE_ENV=production node ./src/index.js",
+    "start": "node ./src/index.js",
     "dev": "nodemon ./src/index.js",
     "docker": "docker-compose up",
     "lint": "eslint ./src/ --ignore-path .gitignore",
     "lint:fix": "yarn lint --fix",
     "lint:watch": "yarn lint --watch",
+    "test:integration": "mocha --timeout 20000 --exit src/test/integration",
     "test": "nyc --reporter=html --reporter=text mocha --timeout 20000 --exit --recursive src/test",
     "test:unit": "mocha ./src/test/unit/**/*.js --colors --exit",
     "coverage": "nyc report --reporter=text-lcov",
@@ -49,6 +50,7 @@
     "lint-staged": "^10.5.0",
     "mocha": "^8.2.0",
     "nodemon": "^2.0.6",
+    "supertest": "^5.0.0",
     "winston": "^3.3.3"
   },
   "devDependencies": {

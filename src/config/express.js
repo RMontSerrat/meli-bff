@@ -13,6 +13,6 @@ app.use(compress());
 
 app.use(cors);
 
-app.use(routes);
+app.use('/api', routes);
 
 module.exports = app;

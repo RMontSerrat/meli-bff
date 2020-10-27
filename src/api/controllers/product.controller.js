@@ -10,6 +10,13 @@ const {
 const search = async (req, res, next) => {
   try {
     const query = req.query.q;
+    if (!query) {
+      return next(new APIError({
+        message: 'Necessary query argument',
+        status: 422,
+      }));
+    }
+
     const result = await getItems(query);
     const normalizedResult = normalizeSearchProducts(result);
 
@@ -30,7 +37,6 @@ const item = async (req, res, next) => {
     const { id } = req.params;
     const result = await getItem(id);
     const normalizedResult = normalizeProduct(result);
-
     await itemValidation.validateAsync(normalizedResult);
 
     return res.json(normalizedResult);
