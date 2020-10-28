@@ -1,22 +1,25 @@
-const axios = require('axios');
+const { setup } = require('axios-cache-adapter');
 
-const instance = axios.create({
-  header: {
+const axiosInstance = setup({
+  headers: {
     'Content-Type': 'application/json',
     Accept: 'application/json',
+  },
+  cache: {
+    maxAge: 15 * 60 * 1000, // 15 minutes
   },
 });
 
 const getItems = async (q) => {
   const url = `${process.env.MELI_API_SEARCH_URL}?q=${q}&limit=4`;
-  const result = await axios.get(url);
+  const result = await axiosInstance.get(url);
   return result.data;
 };
 
 const getItem = async (id) => {
   const url = `${process.env.MELI_API_ITEMS_URL}/${id}`;
-  const getCurrentItem = instance.get(url);
-  const getDescription = axios.get(`${url}/description`);
+  const getCurrentItem = axiosInstance.get(url);
+  const getDescription = axiosInstance.get(`${url}/description`);
 
   const [item, itemDescription] = await Promise.all([getCurrentItem, getDescription]);
 
