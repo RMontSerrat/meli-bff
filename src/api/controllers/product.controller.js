@@ -1,52 +1,37 @@
-const logger = require('../../config/logger');
+const httpStatus = require('http-status');
 const { normalizeSearchProducts, normalizeProduct } = require('../helpers/normalizeProduct');
 const { getItems, getItem } = require('../services/product');
-const APIError = require('../middlewares/apiError');
+const APIError = require('../utils/APIError');
 const {
   searchValidation,
   itemValidation,
 } = require('../validations/product.validation');
 
 const search = async (req, res, next) => {
-  try {
-    const query = req.query.q;
-    if (!query) {
-      return next(new APIError({
-        message: 'Necessary query argument',
-        status: 422,
-      }));
-    }
+  const query = req.query.q;
 
-    const result = await getItems(query);
-    const normalizedResult = normalizeSearchProducts(result);
-
-    await searchValidation.validateAsync(normalizedResult);
-
-    return res.json(normalizedResult);
-  } catch (error) {
-    logger.error(`search error: ${error}`);
+  if (!query) {
     return next(new APIError({
-      message: error.message,
-      status: error.status,
+      message: 'Necessary query argument',
+      status: httpStatus.UNPROCESSABLE_ENTITY,
     }));
   }
+
+  const result = await getItems(query);
+  const normalizedResult = normalizeSearchProducts(result);
+
+  await searchValidation.validateAsync(normalizedResult);
+
+  return res.json(normalizedResult);
 };
 
 const item = async (req, res, next) => {
-  try {
-    const { id } = req.params;
-    const result = await getItem(id);
-    const normalizedResult = normalizeProduct(result);
-    await itemValidation.validateAsync(normalizedResult);
+  const { id } = req.params;
+  const result = await getItem(id);
+  const normalizedResult = normalizeProduct(result);
+  await itemValidation.validateAsync(normalizedResult);
 
-    return res.json(normalizedResult);
-  } catch (error) {
-    logger.error(`item error: ${error}`);
-    return next(new APIError({
-      message: error.message,
-      status: error.status,
-    }));
-  }
+  return res.json(normalizedResult);
 };
 
 module.exports = {
