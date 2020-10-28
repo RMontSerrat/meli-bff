@@ -1,6 +1,6 @@
 const faker = require('faker');
 const { expect } = require('chai');
-const { normalizeSearchProducts, normalizeProduct } = require('../../../api/helpers/normalizeProduct');
+const { normalizeSearchProducts, normalizeProduct } = require('../../../helpers/normalizeProduct');
 
 const price = faker.finance.amount();
 const currencyId = faker.finance.currencyCode();

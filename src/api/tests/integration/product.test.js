@@ -3,11 +3,11 @@
 const request = require('supertest');
 const { expect } = require('chai');
 const httpStatus = require('http-status');
-const app = require('../../index');
+const app = require('../../../index');
 const {
   searchValidation,
   itemValidation,
-} = require('../../api/validations/product.validation');
+} = require('../../validations/product.validation');
 
 describe('Items API', async () => {
   it('GET /api/items', () => request(app)
