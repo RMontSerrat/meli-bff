@@ -1,5 +1,6 @@
 const httpStatus = require('http-status');
 const expressValidation = require('express-validation');
+const logger = require('../../config/logger');
 const { env } = require('../../config/vars');
 const APIError = require('../utils/APIError');
 
@@ -37,6 +38,8 @@ const converter = (err, req, res, next) => {
     });
   }
 
+  logger.error(err);
+
   return handler(convertedError, req, res);
 };
 
@@ -45,6 +48,9 @@ const notFound = (req, res, next) => {
     message: 'Not found',
     status: httpStatus.NOT_FOUND,
   });
+
+  logger.error(err);
+
   return handler(err, req, res);
 };
 
