@@ -20,7 +20,7 @@
     "test:integration": "cross-env NODE_ENV=test mocha --timeout 20000 --exit src/api/tests/integration",
     "test": "cross-env NODE_ENV=test nyc --reporter=html --reporter=text mocha --timeout 20000 --exit --recursive src/api/tests",
     "test:unit": "cross-env NODE_ENV=test mocha ./src/api/tests/unit/**/*.js --colors --exit",
-    "test:watch": "cross-env NODE_ENV=test mocha --watch src/api/tests/unit",
+    "test:watch": "cross-env NODE_ENV=test mocha --watch ./src/api/tests/unit/**/*.js",
     "coverage": "nyc report --reporter=text-lcov",
     "validate": "yarn lint && yarn test"
   },

@@ -9,7 +9,7 @@
  - Request validation with [joi](https://github.com/hapijs/joi)
  - Gzip compression with [compression](https://github.com/expressjs/compression)
  - Linting with [eslint](http://eslint.org)
- - Tests with [mocha](https://mochajs.org), [chai](http://chaijs.com) and [sinon](http://sinonjs.org)
+ - Tests with [mocha](https://mochajs.org) and [chai](http://chaijs.com)
  - Code coverage with [istanbul](https://istanbul.js.org)
  - Git hooks with [husky](https://github.com/typicode/husky) 
  - Logging with [morgan](https://github.com/expressjs/morgan)
