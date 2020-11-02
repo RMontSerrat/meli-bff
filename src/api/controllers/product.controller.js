@@ -28,7 +28,6 @@ const search = async (req, res, next) => {
 const item = async (req, res, next) => {
   const { id } = req.params;
   const result = await getItem(id);
-  console.log(result, 'result');
   const normalizedResult = normalizeProduct(result);
   await itemValidation.validateAsync(normalizedResult);
 
