@@ -1,6 +1,6 @@
 const cors = require('cors');
 
-const allowlist = ['http://localhost:3000'];
+const allowlist = ['http://localhost:3000', 'https://meli-frontent-app.herokuapp.com'];
 
 const corsOptionsDelegate = (req, callback) => {
   let corsOptions;
