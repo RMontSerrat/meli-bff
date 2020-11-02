@@ -1,7 +1,9 @@
 const getCategories = (result) => {
   if (!result.filters) return [];
-  const categories = result.filters.find((item) => item.id === 'category').values.map((item) => item.path_from_root);
-  return categories.flat().map((item) => item.name);
+  const categories = result.filters.find((item) => item.id === 'category');
+  if (!categories) return [];
+  const categoriesList = categories.values.map((item) => item.path_from_root);
+  return categoriesList.flat().map((item) => item.name);
 };
 
 const getPriceInteger = (price) => Number(price.toFixed(2).split('.')[0]);
@@ -22,7 +24,12 @@ const commonProperties = (item) => ({
 });
 
 const normalizeSearchProducts = (result) => {
-  if (!result || result.results.length <= 0) return [];
+  if (!result || result.results.length <= 0) {
+    return {
+      categories: [],
+      items: [],
+    };
+  }
   const categories = getCategories(result);
   const items = result.results.map((item) => {
     const common = commonProperties(item);

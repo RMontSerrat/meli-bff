@@ -1,6 +1,6 @@
 const cors = require('cors');
 
-const allowlist = ['http://localhost:5000'];
+const allowlist = ['http://localhost:3000'];
 
 const corsOptionsDelegate = (req, callback) => {
   let corsOptions;

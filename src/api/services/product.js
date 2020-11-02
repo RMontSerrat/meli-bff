@@ -5,6 +5,7 @@ const axiosInstance = setup({
     'Content-Type': 'application/json',
     Accept: 'application/json',
   },
+  timeout: 1000,
   cache: {
     maxAge: 15 * 60 * 1000, // 15 minutes
   },
