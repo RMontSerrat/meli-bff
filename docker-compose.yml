@@ -1,13 +1,14 @@
-version: '3.4'
+version: "2"
 
 services:
   meli-bff:
-    build:
-      context: .
-      target: development
+    build: .
     volumes:
-      - ./src:/meli-bff/src/
+      - .:/app
     ports:
-      - 5000:5000
+      - "5000:5000"
     env_file:
       - .env
+    command: yarn start -- -L
+    environment:
+      - NODE_ENV=production
