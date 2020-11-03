@@ -15,7 +15,7 @@ const handler = (err, req, res, next) => {
   if (env !== 'development') {
     delete response.stack;
   }
-
+  console.log('entrou erro');
   res.status(err.status);
   res.json(response);
 };

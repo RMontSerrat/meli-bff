@@ -11,19 +11,27 @@ const axiosInstance = setup({
 });
 
 const getItems = async (q) => {
-  const url = `${process.env.MELI_API_SEARCH_URL}?q=${q}&limit=4`;
-  const result = await axiosInstance.get(url);
-  return result.data;
+  try {
+    const url = `${process.env.MELI_API_SEARCH_URL}?q=${q}&limit=4`;
+    const result = await axiosInstance.get(url);
+    return result.data;
+  } catch (e) {
+    return null;
+  }
 };
 
 const getItem = async (id) => {
-  const url = `${process.env.MELI_API_ITEMS_URL}/${id}`;
-  const getCurrentItem = axiosInstance.get(url);
-  const getDescription = axiosInstance.get(`${url}/description`);
+  try {
+    const url = `${process.env.MELI_API_ITEMS_URL}/${id}`;
+    const getCurrentItem = axiosInstance.get(url);
+    const getDescription = axiosInstance.get(`${url}/description`);
 
-  const [item, itemDescription] = await Promise.all([getCurrentItem, getDescription]);
+    const [item, itemDescription] = await Promise.all([getCurrentItem, getDescription]);
 
-  return { ...item.data, ...itemDescription.data };
+    return { ...item.data, ...itemDescription.data };
+  } catch (e) {
+    return null;
+  }
 };
 
 module.exports = {
